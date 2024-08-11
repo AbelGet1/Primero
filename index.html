@@ -1,0 +1,70 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Landing Page</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        .landing-page {
+            background: url('cool-image.jpg') no-repeat center center;
+            background-size: cover;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .arrow-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .tiles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 50px;
+        }
+        .tile {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .tile:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-page">
+        <h1>Welcome to Our Site</h1>
+        <p>Scroll down to explore</p>
+        <div class="arrow-down">↓</div>
+    </div>
+
+    <div class="tiles">
+        <div class="tile">Tile 1</div>
+        <div class="tile">Tile 2</div>
+        <div class="tile">Tile 3</div>
+        <!-- Add more tiles as needed -->
+    </div>
+</body>
+</html>
