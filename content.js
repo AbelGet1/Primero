@@ -1,35 +1,25 @@
-// content.js (for managing content)
+document.addEventListener('DOMContentLoaded', function() {
+    const tileContainer = document.getElementById('tiles');
 
-const express = require('express');
-const router = express.Router();
+    // Fetch contents from the server
+    fetch('/content')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(content => {
+                const tile = document.createElement('div');
+                tile.className = 'tile';
+                
+                tile.innerHTML = `
+                    <img src="path-to-image.jpg" alt="${content.title}">
+                    <h3>${content.title}</h3>
+                `;
+                
+                tile.addEventListener('click', () => {
+                    window.location.href = `content.html?id=${content.id}`;
+                });
 
-let contents = []; // In-memory content store
-
-// Create Content
-router.post('/content', verifyToken, (req, res) => {
-    const content = {
-        id: contents.length + 1,
-        title: req.body.title,
-        body: req.body.body,
-        createdBy: req.user.username
-    };
-    contents.push(content);
-    res.status(201).json(content);
+                tileContainer.appendChild(tile);
+            });
+        })
+        .catch(error => console.error('Error fetching content:', error));
 });
-
-// Get All Content
-router.get('/content', (req, res) => {
-    res.json(contents);
-});
-
-// Get Single Content by ID
-router.get('/content/:id', (req, res) => {
-    const content = contents.find(c => c.id === parseInt(req.params.id));
-    if (!content) return res.status(404).send('Content not found');
-    res.json(content);
-});
-
-// Middleware for token verification
-// Use `verifyToken` middleware from Step 1
-
-module.exports = router;
